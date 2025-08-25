@@ -1,13 +1,13 @@
 # mdb-k8s-operator-demo
 A simple demo for deploying a MongoDB replica set on K8s (using minikube)
 
-
-Here’s a mini tutorial on how to use MongoDB with Kubernetes. This tutorial combines general recommendations and step-by-step guidance from the provided notes:
-
 ---
+
+This mini tutorial combines general recommendations and step-by-step guidance from my personal experience:
 
 ### Prerequisites:
 Before starting, ensure you have:
+0. An **EC2** instance. For this demo, I suggest at least one t2.large instance (2 cores / 8 GB RAM / 30 GB storage ) with a public IP address.
 1. **Docker** installed.
 ```bash
 sudo yum install -y docker
