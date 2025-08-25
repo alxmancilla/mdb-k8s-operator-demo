@@ -1,6 +1,5 @@
 # mdb-k8s-operator-demo
-A simple demo to deploy a MongoDB replica set in K8s (using minikube)
-
+A simple demo for deploying a MongoDB replica set on K8s (using minikube)
 
 
 Here’s a mini tutorial on how to use MongoDB with Kubernetes. This tutorial combines general recommendations and step-by-step guidance from the provided notes:
