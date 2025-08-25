@@ -3,16 +3,44 @@ A simple demo to deploy a MongoDB replica set in K8s (using minikube)
 
 
 
-Based on publicly available information, here’s a mini tutorial on how to use MongoDB with Kubernetes. This tutorial combines general recommendations and step-by-step guidance from the provided notes:
+Here’s a mini tutorial on how to use MongoDB with Kubernetes. This tutorial combines general recommendations and step-by-step guidance from the provided notes:
 
 ---
 
 ### Prerequisites:
 Before starting, ensure you have:
 1. **Docker** installed.
+```bash
+sudo yum install -y docker
+sudo usermod -aG docker $USER && newgrp docker
+sudo systemctl start docker && sudo systemctl enable docker
+docker -v
+```
 2. A Kubernetes cluster set up (you can use Minikube for local development).
+```bash
+sudo dnf update -y
+sudo dnf install -y curl wget git conntrack
+
+sudo yum update -y
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
+sudo rpm -Uvh minikube-latest.x86_64.rpm
+
+minikube version
+```
 3. **kubectl** (Kubernetes command-line tool) installed.
+```bash
+curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
+```
 4. **helm** (Kubernetes package manager) installed.
+```bash
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+helm version
+```
 
 ---
 
@@ -177,7 +205,7 @@ Create a MongoDB user with SCRAM authentication:
      passwordSecretKeyRef:
        name: my-scram-secret
        key: password
-     username: user1
+     username: mdbadmin
      db: admin
      mongodbResourceRef:
        name: my-demo-rs
@@ -211,12 +239,12 @@ Create a MongoDB user with SCRAM authentication:
 3. Access MongoDB shell via a pod:
    ```bash
    kubectl exec --namespace mongodb -it my-demo-rs-0 -- bash
-   mongosh --host <POD-IP-HERE> --port 27017 -u user1
+   mongosh --host <POD-IP-HERE> --port 27017 -u mdbadmin
    ```
 
 ---
 
-### Notes on MongoDB Ops Manager
+### Notes on MongoDB Ops Manager / Cloud Manager
 
 MongoDB Ops Manager can integrate with Kubernetes for managing and monitoring clusters. If using Ops Manager:
 - Generate an API key and add it as a secret in Kubernetes.
