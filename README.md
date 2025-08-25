@@ -7,15 +7,16 @@ This mini tutorial combines general recommendations and step-by-step guidance fr
 
 ### Prerequisites:
 Before starting, ensure you have:
-0. An **EC2** instance. For this demo, I suggest at least one t2.large instance (2 cores / 8 GB RAM / 30 GB storage ) with a public IP address.
-1. **Docker** installed.
+
+1. An **EC2** instance. For this demo, I suggest at least one t2.large instance (2 cores / 8 GB RAM / 30 GB storage ) with a public IP address.
+2. **Docker** installed.
 ```bash
 sudo yum install -y docker
 sudo usermod -aG docker $USER && newgrp docker
 sudo systemctl start docker && sudo systemctl enable docker
 docker -v
 ```
-2. A Kubernetes cluster set up (you can use Minikube for local development).
+3. A Kubernetes cluster set up (you can use Minikube for local development).
 ```bash
 sudo dnf update -y
 sudo dnf install -y curl wget git conntrack
@@ -26,14 +27,14 @@ sudo rpm -Uvh minikube-latest.x86_64.rpm
 
 minikube version
 ```
-3. **kubectl** (Kubernetes command-line tool) installed.
+4. **kubectl** (Kubernetes command-line tool) installed.
 ```bash
 curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 sudo chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
 ```
-4. **helm** (Kubernetes package manager) installed.
+5. **helm** (Kubernetes package manager) installed.
 ```bash
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 chmod 700 get_helm.sh
